@@ -10,6 +10,7 @@
 
 #include <tuple>
 #include <variant>
+#include <utility>
 
 namespace flux {
 
@@ -104,7 +105,11 @@ private:
                 inc_impl<N+1>(self, cur);
             }
         } else {
-            flux::inc(std::get<N>(self.bases_), std::get<N>(cur));
+            if (cur.index() == N) {
+                flux::inc(std::get<N>(self.bases_), std::get<N>(cur));
+            } else {
+                std::unreachable();
+            }
         }
     }
 
@@ -142,7 +147,11 @@ private:
                 return read_impl<N+1>(self, cur);
             }
         } else {
-            return flux::read_at(std::get<N>(self.bases_), std::get<N>(cur));
+            if (cur.index() == N) {
+                return flux::read_at(std::get<N>(self.bases_), std::get<N>(cur));
+            } else {
+                std::unreachable();
+            }
         }
     }
 

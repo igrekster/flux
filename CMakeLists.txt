@@ -18,7 +18,7 @@ target_sources(flux INTERFACE
     BASE_DIRS ${CMAKE_CURRENT_SOURCE_DIR}/include
     FILES ${FLUX_HEADERS})
 
-target_compile_features(flux INTERFACE $<IF:$<CXX_COMPILER_ID:MSVC>,cxx_std_23,cxx_std_20>)
+target_compile_features(flux INTERFACE cxx_std_23)
 set_target_properties(flux PROPERTIES CXX_STANDARD_REQUIRED On)
 
 add_library(flux-internal INTERFACE)
